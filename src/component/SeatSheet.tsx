@@ -193,7 +193,7 @@ const SeatSheet = (props: ISeatSheet) => {
 
   return (
       <Grid2 container direction="row">
-        <Grid2 sx={{alignItems: "center", display: "flex"}}>
+        <Grid2 sx={{display: "flex", flexDirection:"column", alignItems: "center", justifyContent:"center"}}>
           <Grid2 sx={{
             backgroundColor: "#D9D9D9",
             width: "2rem",
@@ -203,6 +203,17 @@ const SeatSheet = (props: ISeatSheet) => {
             alignItems: "center"
           }}>
             <div style={{overflowWrap: "anywhere", width: "min-content"}}>엘리베이터</div>
+          </Grid2>
+          <Grid2 sx={{
+            marginTop: "5rem",
+            backgroundColor: "#D9D9D9",
+            width: "2rem",
+            height: "10rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}>
+            <div style={{overflowWrap: "anywhere", width: "min-content"}}>화장실</div>
           </Grid2>
         </Grid2>
         <Grid2 container direction="column" spacing={2} sx={{padding: 2}}>
@@ -223,7 +234,19 @@ const SeatSheet = (props: ISeatSheet) => {
           ))}
           {/*<DialogComponent open={openDialog} onClose={handleCloseDialog} onSave={handleSave}/>*/}
         </Grid2>
-        <Grid2>
+        <Grid2 sx={{alignItems: "center", display: "flex", marginRight:"1rem", padding:"1rem 0"}}>
+          <Grid2 sx={{
+            backgroundColor: "#D9D9D9",
+            width: "2rem",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}>
+            <div style={{overflowWrap: "anywhere", width: "min-content"}}>창가</div>
+          </Grid2>
+        </Grid2>
+        <Grid2 sx={{marginTop:"1rem"}}>
           {renderQuery()}
           {renderProject()}
           {renderTeam()}

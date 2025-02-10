@@ -74,6 +74,7 @@ const Seat = (props: ISeatProps) => {
                 alignItems: "center",
                 justifyContent: "center",
                 border: `1px solid ${isSelected ? "red" : "black"}`, // 선택 시 테두리 색 변경
+                cursor:"pointer"
               }}
           >
             <CardContent>
