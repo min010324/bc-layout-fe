@@ -1,0 +1,52 @@
+header {
+  /*background-color: yellowgreen;*/
+  /*color: white;*/
+  border-bottom: 1px solid #E3E3E3;
+  justify-content: flex-start;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+footer {
+  background-color: yellowgreen;
+  color: black;
+  border-bottom: 1px solid #d6d5d5;
+  justify-content: flex-end;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;
+}
+
+.header-icon {
+  width: 4.5rem;
+  margin-right: 7rem;
+}
+
+.page {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.page .outlet {
+  width: 100%;
+}
+
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 15.5rem;
+  height: 100%;
+  border-right: 1px solid #E3E3E3;
+}
+
+.side-bar .item{
+  height: 3rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
