@@ -11,6 +11,8 @@ import {ILabel} from "../recoil/label/atom.ts";
 import CustomSnackbar from "./CustomSnackbar.tsx";
 import {Project, selectedProjectState} from "../recoil/seat/withProjectFilter.ts";
 import {selectedTeamState, Team} from "../recoil/seat/withTeamFilter.ts";
+import styles from '../assets/style/seatSheet.module.css';
+import commonStyles from '../assets/style/common.module.css';
 
 interface ISeatSheet {
   seatList: ISeat[];
@@ -112,14 +114,27 @@ const SeatSheet = (props: ISeatSheet) => {
 
   const renderQuery = () => {
     return (
-        <Grid2 sx={{display: "flex", alignItems: "center"}}>
-          <TextField label="이름, 닉네임" name="query" variant="standard" fullWidth value={queryState}
-                     onChange={handleChange} onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleQuery();
-            }
-          }}/>
-          <Button variant="contained" color="primary" onClick={handleQuery}>
+        <Grid2 className={styles['search-container']}>
+          <TextField 
+            label="이름, 닉네임" 
+            name="query" 
+            variant="outlined"
+            size="small"
+            fullWidth 
+            value={queryState}
+            onChange={handleChange} 
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleQuery();
+              }
+            }}
+          />
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={handleQuery}
+            sx={{ minWidth: '100px' }}
+          >
             검색
           </Button>
         </Grid2>
@@ -192,71 +207,65 @@ const SeatSheet = (props: ISeatSheet) => {
 
 
   return (
-      <Grid2 container direction="row">
-        <Grid2 sx={{display: "flex", flexDirection:"column", alignItems: "center", justifyContent:"center"}}>
-          <Grid2 sx={{
-            backgroundColor: "#D9D9D9",
-            width: "2rem",
-            height: "10rem",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}>
-            <div style={{overflowWrap: "anywhere", width: "min-content"}}>엘리베이터</div>
+    <div className={styles.container}>
+      <div className={styles['seat-area']}>
+        {/* 엘리베이터/화장실 영역 */}
+        <Grid2 className={`${commonStyles['flex-column']} ${commonStyles['flex-center']}`}>
+          <Grid2 className={styles['facility-label']}>
+            <div className={styles['facility-text']}>엘리베이터</div>
           </Grid2>
-          <Grid2 sx={{
-            marginTop: "5rem",
-            backgroundColor: "#D9D9D9",
-            width: "2rem",
-            height: "10rem",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}>
-            <div style={{overflowWrap: "anywhere", width: "min-content"}}>화장실</div>
+          <Grid2 className={`${styles['facility-label']} ${styles['toilet-container']}`}>
+            <div className={styles['facility-text']}>화장실</div>
           </Grid2>
         </Grid2>
-        <Grid2 container direction="column" spacing={2} sx={{padding: 2}}>
+
+        {/* 좌석 배치 영역 */}
+        <div className={styles['seat-grid']}>
           {seatData.map((row, rowIndex) => (
-              <Grid2 container key={rowIndex} justifyContent="center" spacing={0}
-                     sx={{backgroundColor: "#D9D9D9", padding: "1rem", width: "50rem"}}>
-                <Grid2 container key={`${rowIndex}_1`} justifyContent="center" spacing={0}>
-                  {row.slice(0, 7).map((seat, index) => (
-                      <Seat seatInfo={seat} key={`seat_${rowIndex}_${index}`}/>
-                  ))}
-                </Grid2>
-                <Grid2 container key={`${rowIndex}_2`} justifyContent="center" spacing={0}>
-                  {row.slice(7).map((seat, index) => (
-                      <Seat seatInfo={seat} key={`seat_${rowIndex}_${index}`}/>
-                  ))}
-                </Grid2>
-              </Grid2>
+            <div key={rowIndex} className={styles['seat-row']}>
+              {/* 첫 번째 줄: 0-6번 좌석 */}
+              <div className={styles['seat-row-content']}>
+                {row.slice(0, 7).map((seat, index) => (
+                  <Seat key={`seat_${rowIndex}_${index}`} seatInfo={seat} />
+                ))}
+              </div>
+              {/* 두 번째 줄: 7-13번 좌석 */}
+              <div className={styles['seat-row-content']}>
+                {row.slice(7, 14).map((seat, index) => (
+                  <Seat key={`seat_${rowIndex}_${index + 7}`} seatInfo={seat} />
+                ))}
+              </div>
+            </div>
           ))}
-          {/*<DialogComponent open={openDialog} onClose={handleCloseDialog} onSave={handleSave}/>*/}
-        </Grid2>
-        <Grid2 sx={{alignItems: "center", display: "flex", marginRight:"1rem", padding:"1rem 0"}}>
-          <Grid2 sx={{
-            backgroundColor: "#D9D9D9",
-            width: "2rem",
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}>
-            <div style={{overflowWrap: "anywhere", width: "min-content"}}>창가</div>
+        </div>
+
+        {/* 창가 영역 */}
+        <Grid2 className={styles['window-container']}>
+          <Grid2 className={styles['facility-label']}>
+            <div className={styles['facility-text']}>창가</div>
           </Grid2>
         </Grid2>
-        <Grid2 sx={{marginTop:"1rem"}}>
+      </div>
+
+      {/* 필터 영역 */}
+      <div className={styles['filter-section']}>
+        <div className={styles['filter-group']}>
           {renderQuery()}
           {renderProject()}
           {renderTeam()}
           {renderLabel()}
-        </Grid2>
-        {/* Dialog 컴포넌트 */}
-        <LabelDialogComponent open={openDialog} onClose={handleCloseDialog} labelInfo={labelState}/>
-        <CustomSnackbar isOpen={existSelectedLabel} onClose={() => setExistSelectedLabel(false)} message="라벨을 선택해주세요."
-                        type={"error"}/>
-      </Grid2>
+        </div>
+      </div>
+
+      {/* Dialog 컴포넌트들 */}
+      <LabelDialogComponent open={openDialog} onClose={handleCloseDialog} labelInfo={labelState}/>
+      <CustomSnackbar 
+        isOpen={existSelectedLabel} 
+        onClose={() => setExistSelectedLabel(false)} 
+        message="라벨을 선택해주세요."
+        type="error"
+      />
+    </div>
   );
 
 

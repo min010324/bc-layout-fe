@@ -36,17 +36,14 @@ const SeatPage = () => {
     })
   }, []);
   return (
-      <>
-        <div style={{
-          overflowY: "scroll",
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center"
-        }}>
-          <SeatSheet seatList={seat}/>
-        </div>
-      </>
+    <div style={{
+      height: "100vh",
+      paddingTop: "var(--header-height)",  // 헤더 높이만큼 패딩
+      boxSizing: "border-box",  // 패딩을 높이에 포함
+      overflow: "auto" // 스크롤 허용
+    }}>
+      <SeatSheet seatList={seat}/>
+    </div>
   )
 
 }

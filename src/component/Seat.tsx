@@ -4,6 +4,7 @@ import DialogComponent from "./DialogComponent.tsx";
 import {ISeat} from "../recoil/seat/atom.ts";
 import {useRecoilValue} from "recoil";
 import {withFilter, withLabeledFilter, withProjectFilter, withQueryFilter, withTeamFilter} from "../recoil/seat";
+import styles from '../assets/style/seat.module.css';
 
 
 interface ISeatProps {
@@ -53,40 +54,39 @@ const Seat = (props: ISeatProps) => {
   }, [user, queriedSeat, labeledSeat, filteredSeat]);
 
   const handleOnClick = () => {
-    setIsSelected((prev) => !prev); // 클릭할 때마다 상태 변경
+    setIsSelected((prev) => !prev);
     setOpenDialog(true);
   };
 
   const handleCloseDialog = () => {
-    setIsSelected((prev) => !prev); // 클릭할 때마다 상태 변경
+    setIsSelected((prev) => !prev);
     setOpenDialog(false);
   };
 
   return (
-      <>
-        <Grid2 key={seatId} onClick={handleOnClick}>
-          <Card
-              sx={{
-                backgroundColor: `${seatColor}`,
-                width: 100,
-                height: 50,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: `1px solid ${isSelected ? "red" : "black"}`, // 선택 시 테두리 색 변경
-                cursor:"pointer"
-              }}
-          >
-            <CardContent>
-              <Typography variant="body2" align="center" sx={{whiteSpace: "pre-wrap"}}>
-                {user ? `${user?.nickname}\n(${user?.name})` : ""}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid2>
-        {/* Dialog 컴포넌트 */}
-        <DialogComponent open={openDialog} onClose={handleCloseDialog} seatInfo={props.seatInfo}/>
-      </>
+    <>
+      <Grid2 key={seatId} onClick={handleOnClick}>
+        <Card
+          className={`
+            ${styles['seat-card']} 
+            ${isSelected ? styles['seat-card-selected'] : styles['seat-card-normal']}
+            ${user ? styles['seat-occupied'] : styles['seat-empty']}
+            ${filteredSeat.some(seat => seat.seatId === seatId) ? styles['seat-highlighted'] : ''}
+          `}
+          sx={{ backgroundColor: seatColor }}
+        >
+          <CardContent>
+            <Typography 
+              variant="body2" 
+              className={styles['seat-text']}
+            >
+              {user && `${user.nickname}\n(${user.name})`}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid2>
+      <DialogComponent open={openDialog} onClose={handleCloseDialog} seatInfo={props.seatInfo}/>
+    </>
   )
 }
 export default Seat;

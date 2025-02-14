@@ -1,0 +1,69 @@
+.seat-card {
+  width: 120px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: var(--button-radius);
+  transition: all var(--transition-speed) ease;
+  margin: 4px;
+  background-color: var(--background-light);
+  box-shadow: 0 1px 3px var(--shadow-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.seat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-color);
+  opacity: 0;
+  transition: opacity var(--transition-speed) ease;
+}
+
+.seat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
+.seat-card:hover::before {
+  opacity: 1;
+}
+
+.seat-card-selected {
+  border: 2px solid var(--primary-color);
+  background-color: var(--secondary-color);
+}
+
+.seat-card-normal {
+  border: 1px solid var(--border-color);
+}
+
+.seat-text {
+  white-space: pre-wrap;
+  text-align: center;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.seat-empty {
+  background-color: var(--background-dark);
+  opacity: 0.8;
+}
+
+.seat-occupied {
+  background-color: var(--background-light);
+}
+
+.seat-highlighted {
+  background-color: var(--accent-color);
+  color: white;
+  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
+} 

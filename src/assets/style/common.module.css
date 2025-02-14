@@ -1,0 +1,57 @@
+:root {
+  --primary-color: #3B82F6;
+  --secondary-color: #F1F5F9;
+  --accent-color: #6366F1;
+  --hover-color: #2563EB;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --border-color: #E2E8F0;
+  --success-color: #10B981;
+  --warning-color: #F59E0B;
+  --error-color: #EF4444;
+  --background-light: #FFFFFF;
+  --background-dark: #F8FAFC;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --header-height: 64px; /* 헤더의 실제 높이에 맞게 조정 */
+  --card-radius: 12px;
+  --button-radius: 8px;
+  --transition-speed: 0.2s;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.margin-top-1 {
+  margin-top: 1rem;
+}
+
+.background-gray {
+  background-color: var(--background-dark);
+}
+
+.card-shadow {
+  box-shadow: 0 1px 3px var(--shadow-color),
+              0 1px 2px -1px var(--shadow-color);
+  transition: box-shadow var(--transition-speed) ease;
+}
+
+.card-shadow:hover {
+  box-shadow: 0 4px 6px -1px var(--shadow-color),
+              0 2px 4px -2px var(--shadow-color);
+} 
