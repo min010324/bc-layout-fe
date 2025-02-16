@@ -115,23 +115,23 @@ const SeatSheet = (props: ISeatSheet) => {
   const renderQuery = () => {
     return (
         <Grid2 className={styles['search-container']}>
-          <TextField 
-            label="이름, 닉네임" 
-            name="query" 
+          <TextField
+            label="이름, 닉네임"
+            name="query"
             variant="outlined"
             size="small"
-            fullWidth 
+            fullWidth
             value={queryState}
-            onChange={handleChange} 
+            onChange={handleChange}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 handleQuery();
               }
             }}
           />
-          <Button 
-            variant="contained" 
-            color="primary" 
+          <Button
+            variant="contained"
+            color="primary"
             onClick={handleQuery}
             sx={{ minWidth: '100px' }}
           >
@@ -210,7 +210,7 @@ const SeatSheet = (props: ISeatSheet) => {
     <div className={styles.container}>
       <div className={styles['seat-area']}>
         {/* 엘리베이터/화장실 영역 */}
-        <Grid2 className={`${commonStyles['flex-column']} ${commonStyles['flex-center']}`}>
+        <Grid2 className={`${commonStyles['flex-column']} ${commonStyles['flex-center']} ${commonStyles['facility-gap']}`}>
           <Grid2 className={styles['facility-label']}>
             <div className={styles['facility-text']}>엘리베이터</div>
           </Grid2>
@@ -259,9 +259,9 @@ const SeatSheet = (props: ISeatSheet) => {
 
       {/* Dialog 컴포넌트들 */}
       <LabelDialogComponent open={openDialog} onClose={handleCloseDialog} labelInfo={labelState}/>
-      <CustomSnackbar 
-        isOpen={existSelectedLabel} 
-        onClose={() => setExistSelectedLabel(false)} 
+      <CustomSnackbar
+        isOpen={existSelectedLabel}
+        onClose={() => setExistSelectedLabel(false)}
         message="라벨을 선택해주세요."
         type="error"
       />
