@@ -1,7 +1,7 @@
 import seatAtom, {ISeat} from "./atom.ts";
 import {atom, selector} from "recoil";
 
-export type Project = "NERP" | "LAMF" | "AI";
+export type Project = "LAMF"|"AI"|"빌드센터 안마기계"|"빌드센터 좌석배치"|"NERP";
 
 
 const selectedProjectState = atom<Project>({

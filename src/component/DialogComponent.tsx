@@ -20,6 +20,8 @@ import userAtom from "../recoil/user";
 import {API} from "../util/api.ts";
 import {useNavigate} from "react-router-dom";
 import CustomSnackbar from "./CustomSnackbar.tsx";
+import {Team} from "../recoil/seat/withTeamFilter.ts";
+import {Project} from "../recoil/seat/withProjectFilter.ts";
 
 enum Mode {
   NOT_USE = "NOT_USE",
@@ -34,8 +36,8 @@ interface SeatDialogProps {
   // onSave: (updatedSeat: any) => void;
 }
 
-const teams = ["Advanced Build", "Design Team", "Engineering"];
-const projects = ["NERP", "LAMF", "Alpha"];
+const teams :Team[] = ["Advanced Build","클라우드데브옵스개발","클라우드네이티브개발","모바일개발","슈퍼앱개발","모바일서비스개발","플랫폼엔지니어링","모던애플리케이션리드","AX리드","AM Innovation","글로벌 Discovery","빌드센터"];
+const projects :Project[] = ["LAMF","AI","빌드센터 안마기계","빌드센터 좌석배치","NERP"];
 
 const DialogComponent = ({open, onClose, seatInfo}: SeatDialogProps) => {
   const myInfo = useRecoilValue(userAtom);
@@ -150,6 +152,7 @@ const DialogComponent = ({open, onClose, seatInfo}: SeatDialogProps) => {
                     value={formData.endDate ? dayjs(formData.endDate) : null} // endDate가 없을 경우 null 반환
                     onChange={handleDate}
                     disabled={mode === Mode.USE}
+                    shouldDisableDate={(date) => dayjs(date).isBefore(dayjs(), 'day')}
                 />
               </LocalizationProvider>
             </Grid2>

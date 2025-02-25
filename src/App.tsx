@@ -5,7 +5,7 @@ import Layout from "./component/Layout.tsx";
 import SeatPage from "./page/SeatPage.tsx";
 
 function App() {
-  const HeaderTitle = "빌드 센터 내 자리 배치 및 사물함 현황 관리 서비스 ";
+  const HeaderTitle = "빌드 센터 자리 배치 서비스 ";
   const FooterMessage = "This is the footer message for the entire app.";
 
   return (

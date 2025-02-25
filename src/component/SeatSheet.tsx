@@ -18,9 +18,8 @@ interface ISeatSheet {
   seatList: ISeat[];
 }
 
-
-const teams: Team[] = ["Advanced Build","클라우드데브옵스개발","클라우드네이티브개발","모바일개발","슈퍼앱개발","모바일서비스개발","플랫폼엔지니어링","모던애플리케이션리드","AX리드","AM Innovation","글로벌 Discovery"];
-const projects: Project[] = ["NERP", "LAMF", "AI"];
+const teams :Team[] = ["Advanced Build","클라우드데브옵스개발","클라우드네이티브개발","모바일개발","슈퍼앱개발","모바일서비스개발","플랫폼엔지니어링","모던애플리케이션리드","AX리드","AM Innovation","글로벌 Discovery","빌드센터"];
+const projects :Project[] = ["LAMF","AI","빌드센터 안마기계","빌드센터 좌석배치","NERP"];
 
 // 자리 데이터 생성 함수
 const SeatSheet = (props: ISeatSheet) => {
